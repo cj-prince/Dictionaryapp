@@ -10,11 +10,15 @@ const WordDef = () => {
   const [audio, setAudio] = useState()
   const [display, setDisplay] = useState([])
   const [show, setShow] = useState([])
+  const [similar, setSimilar] = useState([])
 
-
+  // console.log(similar);
   const fetchData = async ()=>{
       const data = await fetch ( `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
+      const data1 = await fetch (`https://api.datamuse.com/sug?s=${word}`)
       const newData = await data.json()
+      const newData1 = await data1.json()
+      setSimilar(newData1)
       setDisplay(newData[0])
       setShow(newData)
       const url = newData[0].phonetics[0].audio
@@ -46,7 +50,7 @@ const WordDef = () => {
           </SearchDiv>
         </MainDiv>
       {word === "" ? (
-        <WordDefinitions audio={audio} display={display} show={show} />
+        <WordDefinitions audio={audio} display={display} show={show} similar ={similar} />
       ) : (
         <DefaultView>
           Words You may Know

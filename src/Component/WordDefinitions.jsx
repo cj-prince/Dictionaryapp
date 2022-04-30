@@ -1,8 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
+import SimilarWords from './SimilarWords'
 import WordDes from './WordDes'
 
-const WordDefinitions = ({audio,display, show}) => {
+const WordDefinitions = ({audio,display, show, similar}) => {
   return (
     <Main>
           <WordDiv> word: {display.word}</WordDiv>
@@ -18,7 +19,13 @@ const WordDefinitions = ({audio,display, show}) => {
           <div>
               <WordDes show={show} />
           </div>
-          <PhontDiv>Phonetic: {' '} <span>{display.phonetic}</span> </PhontDiv>
+          <div>
+            <MeaningDiv>Similar Words:</MeaningDiv> 
+            <SimilarWords similar={similar}/>
+          </div>
+          <PhontDiv>
+            Phonetic: {' '} <span>{display.phonetic}</span> 
+          </PhontDiv>
     </Main>
   )
 }
@@ -45,6 +52,7 @@ const PhontDiv = styled.div`
   font-size: 20px;
   font-weight: 500;
   color: gray;
+  margin-bottom: 20px;
   span{
     color:white ;
   }
